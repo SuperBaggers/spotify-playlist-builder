@@ -358,8 +358,7 @@ async function createPlaylist() {
   const uris = tracks.map((t) => t.uri);
   showOverlay(`Adding ${uris.length} tracks…`);
   try {
-    const me = await spFetch("/me");
-    const playlist = await spFetch(`/users/${me.id}/playlists`, {
+    const playlist = await spFetch(`/me/playlists`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
