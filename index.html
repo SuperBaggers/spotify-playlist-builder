@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spotify Playlist Builder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="dot"></span>
+      <h1>Playlist Builder</h1>
+    </div>
+    <div id="account" class="account"></div>
+  </header>
+
+  <main>
+    <!-- Setup needed -->
+    <section id="setup-card" class="card hidden">
+      <h2>Add your Client ID to finish setup</h2>
+      <p class="muted">Open <code>config.js</code>, paste your Spotify <b>Client ID</b> between the
+        quotes, and reload. While you're in the Spotify dashboard, make sure this exact
+        <b>Redirect URI</b> is registered on your app:</p>
+      <div class="uri-box"><code id="redirect-uri"></code></div>
+    </section>
+
+    <!-- Connect -->
+    <section id="connect-card" class="card hidden">
+      <h2>Connect your Spotify</h2>
+      <p class="muted">One click — you'll be sent to Spotify to authorise, then straight back here.
+        Nothing is created until you say so.</p>
+      <button id="connect-btn" class="primary">Connect to Spotify</button>
+      <p class="muted small" style="margin-top:14px">
+        Redirect URI this app will use (must be registered on your Spotify app):<br />
+        <span class="uri-inline"><code id="redirect-uri-2"></code></span>
+      </p>
+    </section>
+
+    <!-- Input -->
+    <section id="input-card" class="card hidden">
+      <h2>1 · Paste your playlist</h2>
+      <p class="muted">One track per line. <b>Artist - Title</b> works best. Lines starting with
+        <code>#</code> are ignored.</p>
+      <textarea id="playlist-input" rows="10" placeholder="Daft Punk - Get Lucky&#10;Fleetwood Mac - Dreams&#10;Tame Impala - The Less I Know The Better"></textarea>
+      <div class="row between">
+        <span class="muted small" id="line-count">0 tracks</span>
+        <button id="match-btn" class="primary">Search Spotify →</button>
+      </div>
+    </section>
+
+    <!-- Review -->
+    <section id="review-card" class="card hidden">
+      <div class="row between">
+        <h2>2 · Review matches</h2>
+        <span class="muted small" id="match-summary"></span>
+      </div>
+      <div class="row controls">
+        <button id="select-all" class="ghost">Select all</button>
+        <button id="select-none" class="ghost">Select none</button>
+      </div>
+      <div id="results"></div>
+
+      <h2 style="margin-top:28px">3 · Export or import</h2>
+      <div class="row wrap">
+        <button class="ghost" data-export="json">Export JSON</button>
+        <button class="ghost" data-export="csv">Export CSV</button>
+        <button class="ghost" data-export="uris">Export URIs</button>
+      </div>
+      <div class="create-box">
+        <input id="playlist-name" type="text" placeholder="New playlist name" value="Imported Playlist" />
+        <label class="check"><input type="checkbox" id="public-check" /> Make public</label>
+        <button id="create-btn" class="primary">Add to my Spotify</button>
+      </div>
+      <div id="create-result"></div>
+    </section>
+  </main>
+
+  <div id="overlay" class="overlay hidden">
+    <div class="spinner"></div>
+    <p id="overlay-text">Working…</p>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
