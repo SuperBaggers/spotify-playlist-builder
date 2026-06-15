@@ -368,7 +368,7 @@ async function createPlaylist() {
       }),
     });
     for (let i = 0; i < uris.length; i += 100) {
-      await spFetch(`/playlists/${playlist.id}/tracks`, {
+      await spFetch(`/playlists/${playlist.id}/items`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ uris: uris.slice(i, i + 100) }),
